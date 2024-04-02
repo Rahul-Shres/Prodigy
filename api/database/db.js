@@ -1,7 +1,6 @@
 const mongoose = require("mongoose")
 
 exports.connectDatabase = async() =>{
-    const MONGO = process.env.MONGOURI;
-    await mongoose.connect(MONGO)
+    await mongoose.connect(process.env.MONGOURI)
     console.log("db connected")
 } 
