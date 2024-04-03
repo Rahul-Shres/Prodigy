@@ -99,3 +99,74 @@ exports.forgotPassword = async(req,res)=>{
          data : email
      })
 }
+
+exports.verifyOtp = async(req,res)=>{
+    const {email, otp} = req.body;
+    console.log(email,otp)
+    if(!email || !otp){
+        return res.status(400).json({
+            message : "Email and Otp required"
+        })
+    }
+
+    const userEmailFound = await User.find({userEmail : email})
+    if(userEmailFound.length == 0){
+        return res.status(400).json({
+            message : "User with that email not found"
+        })
+    }
+
+    if(userEmailFound[0].otp !==otp){
+         res.status(400).json({
+            message : "Invalid Otp"
+        })
+    } else {
+        userEmailFound[0].otp = undefined
+        userEmailFound[0].isOtpVerified = true
+        await userEmailFound[0].save()
+        res.status(200).json({
+            message : "Otp Verified"
+        })
+    }
+}
+
+
+exports.resetPassword = async(req,res)=>{
+    const {email, newPassword, confirmPassword} = req.body;
+    console.log(email,newPassword, confirmPassword)
+
+    if(!email || !newPassword || !confirmPassword){
+        return res.status(400).json({
+            message : "Please provide email, password, confirm  password"
+        })
+    }
+
+    const userFound = await User.find({userEmail : email})
+    if(userFound.length == 0){
+        return res.status(400).json({
+            message : "User with the email does not exist"
+        })
+    }
+
+    if(newPassword != confirmPassword){
+        return res.status(400).json({
+            message : "Password did not matched"
+        })
+    }
+
+    if(userFound[0].isOtpVerified !== true){
+        return res.status(401).json({
+            message : "You cannot perform this action"
+        })
+    }
+
+ 
+    if(userFound){
+        userFound[0].userPassword = bcrypt.hashSync(newPassword,10)
+        await userFound[0].save()
+
+        res.status(200).json({
+            message : "Password changed successfully"
+        })
+    }
+}
