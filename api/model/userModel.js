@@ -23,6 +23,9 @@ const userModel = new Schema({
         type: String,
         enum: ["Customer", "Admin"],
         defult : "Customer"
+    },
+    otp : {
+        type : Number
     }
 })
 
