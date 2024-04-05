@@ -12,11 +12,15 @@ connectDatabase();
 app.use(express.json());
 app.use(express.urlencoded({extended : true}))
 
+app.use(express.static("./uploads"))
+
 // Routes Here
 const authRoute = require('./routes/user/userAuthRoute')
+const productRoute = require('./routes/admin/productRoute')
 
 // this is middleware
-app.use("", authRoute)
+app.use("/api", authRoute)
+app.use("/api", productRoute)
 
 PORT = process.env.PORT
 
