@@ -10,7 +10,7 @@ const adminSeeder = async(req,res) =>{
             userPassword : bcrypt.hashSync("admin",10),
             userName : "admin",
             userPhoneNumber : 9810359789,
-            role : "admin"
+            role : "Admin"
         })
 
         console.log("admin  seeded successfully")
@@ -21,4 +21,4 @@ const adminSeeder = async(req,res) =>{
     
 }
 
-module.export = adminSeeder
+module.exports = adminSeeder

@@ -2,7 +2,7 @@
 const restrictTo = (...roles) => async (req, res, next) => {
     // Extract the roles of the user making the request from the 'role' property of 'req.user'.
     const userRoles = req.user.role;
-
+    console.log(userRoles)
     // Check if none of the user's roles match any of the specified roles.
     if (!roles.includes(userRoles)) { // Check if the 'roles' array includes the user's role.
         // If none of the specified roles match the user's role, send a 400 status response with a message indicating lack of permission.
