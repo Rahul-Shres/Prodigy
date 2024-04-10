@@ -20,7 +20,7 @@ export const preLoaderAnim = () => {
       ease: "Power3.easeOut",
     })
     .to(".texts-container span", {
-      duration: 1.5,
+      duration: 1,
       y: 100,
       skewY: -15,
       stagger: 0.4,
@@ -33,7 +33,7 @@ export const preLoaderAnim = () => {
     })
     .from(".sub", {
       // waiting wala div
-      duration: 2,
+      duration: 1,
       opacity: 0,
       y: 80,
       ease: "expo.easeOut",
