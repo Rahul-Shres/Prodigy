@@ -17,7 +17,10 @@ const userModel = new Schema({
     },
     userPassword : {
         type : String,
-        required : [true, "password must be provided"]
+        required : [true, "password must be provided"],
+        minlength : 8,
+        // select : false
+
     },
     role: {
         type: String,
@@ -25,12 +28,16 @@ const userModel = new Schema({
         defult : "Customer"
     },
     otp : {
-        type : Number
+        type : Number,
+        select : false
     },
     isOtpVerified : {
         type : Boolean,
-        default : false
+        default : false,
+        select : false
     }
+},{
+    timestamps : true
 })
 
 const User = mongoose.model("User", userModel)
