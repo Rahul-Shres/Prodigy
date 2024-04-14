@@ -17,13 +17,13 @@ const Navbar = () => {
     })
   }
   return (
-    <nav className="fixed bottom-10 left-0 right-0 z-50 my-0  mx-auto  flex w-[306px] items-center justify-center gap-1 rounded-lg bg-[#008DDA] px-1 py-1 text-[#e4ded7] backdrop-blur-md sm:w-[383.3px] md:p-2 lg:w-[500px]">
+    <nav className="fixed top-10 left-0 right-0 z-50 my-0  mx-auto  flex w-[306px] items-center justify-center gap-1 rounded-lg bg-[#008DDA] px-1 py-1 text-[#e4ded7] backdrop-blur-md sm:w-[383.3px] md:p-2 lg:w-[500px]">
        <a
         href='https://drive.google.com/file/d/1Mmwl-FRGPm5QVe3AjtukJr_Jpc366Ear/view'
         target='_blank'
         rel='noopener noreferrer'
         className='flex'
-        aria-label='Open my resume'
+        
         data-blobity-tooltip='View Resume'
         data-blobity-magnetic='false'
       >Open Resume</a>

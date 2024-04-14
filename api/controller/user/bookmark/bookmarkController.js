@@ -39,7 +39,7 @@ exports.getMyBookmarks = async(req,res)=>{
 }
 
 
-exports.deleteBookMarkFromCart = async(req,res)=>{
+exports.deleteProductFromBookmark = async(req,res)=>{
     const {productId} = req.params
     const userId = req.user.id
     const product = await Product.findById(productId)

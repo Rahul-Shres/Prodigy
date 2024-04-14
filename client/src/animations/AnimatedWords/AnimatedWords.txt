@@ -1,0 +1,96 @@
+Certainly, let's break down the TypeScript code for the `AnimatedWords` component step by step:
+
+1. **Imports:**
+   ```typescript
+   import { motion } from "framer-motion";
+   import { useEffect } from "react";
+   import { useAnimation } from "framer-motion";
+   import { useInView } from "react-intersection-observer";
+   ```
+   - These are the same imports we discussed earlier: `motion` from "framer-motion", `useEffect` from "react", `useAnimation` from "framer-motion", and `useInView` from "react-intersection-observer". These imports are necessary for animations, side effects, and intersection observer functionality.
+
+2. **Type Definition:**
+   ```typescript
+   type AnimatedWordsProps = {
+       title: string;
+       style: string;
+   };
+   ```
+   - This defines the `AnimatedWordsProps` type, which specifies that the component expects `title` and `style` props, both of which should be strings.
+
+3. **Component Definition:**
+   ```typescript
+   const AnimatedWords: React.FC<AnimatedWordsProps> = ({ title, style }) => {
+       // Custom hooks and animation logic here
+       return (
+           // JSX content for the animated words
+       );
+   };
+   ```
+   - This defines the `AnimatedWords` functional component, which takes props of type `AnimatedWordsProps`. Inside the component, there is logic for animations and rendering JSX content.
+
+4. **Custom Hooks and Animation Logic:**
+   ```typescript
+   const ctrls = useAnimation();
+   const { ref, inView } = useInView({
+       threshold: 0.1,
+       triggerOnce: true,
+   });
+   useEffect(() => {
+       if (inView) {
+           ctrls.start("animate");
+       }
+       if (!inView) {
+           ctrls.start("initial");
+       }
+   }, [ctrls, inView]);
+   ```
+   - `ctrls = useAnimation();`: This line uses the `useAnimation` hook from Framer Motion to create animation controls.
+   - `{ ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });`: This line uses the `useInView` hook from "react-intersection-observer" to detect when the component is in the viewport (`inView`).
+   - `useEffect`: This hook is used to trigger animations based on whether the component is in view (`inView`). When the component enters the viewport, it starts the animation defined by `ctrls.start("animate")`, and when it exits, it goes back to the initial state defined by `ctrls.start("initial")`.
+
+5. **Animation Variants:**
+   ```typescript
+   const wordAnimation = {
+       initial: {
+           opacity: 0,
+           y: 150,
+       },
+       animate: {
+           opacity: 1,
+           y: 0,
+           transition: {
+               delay: 6,
+               ease: [0.2, 0.65, 0.3, 0.9],
+               duration: 1,
+           },
+       },
+   };
+   ```
+   - `wordAnimation`: This object defines animation variants for individual words in the `title`. It specifies initial and animate states along with transition properties such as delay, ease, and duration.
+
+6. **JSX Content:**
+   ```typescript
+   return (
+       <h1 aria-label={title} role="heading">
+           <motion.span ref={ref} className="...">
+               {title.split(" ").map((word, index) => (
+                   <motion.div
+                       key={index}
+                       initial="initial"
+                       animate={ctrls}
+                       transition={{ delayChildren: index * 0.25, staggerChildren: 0.05 }}
+                       className="..."
+                   >
+                       <motion.span className={style} variants={wordAnimation}>
+                           {word + "\u00A0"}
+                       </motion.span>
+                   </motion.div>
+               ))}
+           </motion.span>
+       </h1>
+   );
+   ```
+   - This JSX code renders a heading (`<h1>`) with a motion span (`<motion.span>`) inside. The `ref` is used for intersection observer functionality. Inside the span, each word from the `title` prop is split and mapped to a motion div (`<motion.div>`), where each word is wrapped in a motion span (`<motion.span>`). These elements are animated based on the `ctrls` animation controls and the `wordAnimation` variants.
+
+Overall, this code sets up a component (`AnimatedWords`) that animates its content when it becomes visible in the viewport using Framer Motion animations and React hooks like `useEffect` and `useInView`.
