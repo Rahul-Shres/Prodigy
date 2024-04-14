@@ -1,10 +1,12 @@
-const { getProductReview, deleteReview, addProductReview } = require("../../controller/user/userController")
+const { getMyReviews, createReview } = require("../../controller/user/review/reviewController")
 const isAuthenticated = require("../../middleware/isAuthenticated")
 const catchAsync = require("../../services/catchAsync")
 
 const router = require("express").Router()
 
-router.route("/reviews/:id").get(getProductReview).delete(isAuthenticated, deleteReview).post(isAuthenticated, catchAsync(addProductReview))
+// router.route("/reviews")
+router.route("/").get(isAuthenticated,catchAsync(getMyReviews))
+router.route("/:id").delete(isAuthenticated,catchAsync( deleteReview)).post(isAuthenticated,restrictTo("user"),catchAsync(createReview))
 
 
 module.exports = router

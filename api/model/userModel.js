@@ -35,7 +35,8 @@ const userModel = new Schema({
         type : Boolean,
         default : false,
         select : false
-    }
+    },
+    bookmark :{ type : Schema.Types.ObjectId, ref : "Product"}
 },{
     timestamps : true
 })
