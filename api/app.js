@@ -15,10 +15,10 @@ app.use(express.urlencoded({extended : true}))
 app.use(express.static("./uploads"))
 
 // Routes Here
-const authRoute = require('./routes/user/userAuthRoute')
+const authRoute = require('./routes/auth/userAuthRoute')
 const productRoute = require('./routes/admin/product/productRoute')
 const adminUserRoute = require('./routes/admin/user/adminUserRoute')
-const userReviewRoute = require("./routes/user/userReviewRoute")
+const userReviewRoute = require("./routes/user/userReview/userReviewRoute")
 const bookmarkRoute = require("./routes/user/bookmarkRoute/bookmarkRoute")
 const profileRoute = require("./routes/user/profileRoute/profileRoute")
 

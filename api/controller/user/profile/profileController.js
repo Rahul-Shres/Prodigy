@@ -17,7 +17,9 @@ exports.getMyProfile = async (req, res) => {
 exports.updateMyProfile = async (req, res) => {
   const userId = req.user.id;
   const { userName, userEmail, userPhoneNumber } = req.body;
-  console.log(userName, userEmail, userPhoneNumber);
+  
+  console.log(userName, userEmail, userPhoneNumber, );
+  console.log("from update my profile");
   //update my profile
   const updateData = await User.findByIdAndUpdate(
     userId,

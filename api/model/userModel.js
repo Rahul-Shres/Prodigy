@@ -29,12 +29,12 @@ const userModel = new Schema({
     },
     otp : {
         type : Number,
-        select : false
+        // select : false
     },
     isOtpVerified : {
         type : Boolean,
         default : false,
-        select : false
+        // select : false
     },
     bookmark :{ type : Schema.Types.ObjectId, ref : "Product"}
 },{

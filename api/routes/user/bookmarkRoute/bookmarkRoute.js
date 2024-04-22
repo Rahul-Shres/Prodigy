@@ -1,4 +1,4 @@
-const { getMyBookmarks, deleteProductFromBookmark } = require("../../../controller/user/bookmark/bookmarkController");
+const { getMyBookmarks, deleteProductFromBookmark, addToBookmark } = require("../../../controller/user/bookmark/bookmarkController");
 const isAuthenticated = require("../../../middleware/isAuthenticated");
 const catchAsync = require("../../../services/catchAsync");
 
