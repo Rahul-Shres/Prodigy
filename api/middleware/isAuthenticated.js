@@ -24,6 +24,7 @@ const isAuthenticated = async (req,res,next) =>{
            
         }
         req.user  = doesUserExist
+        console.log(doesUserExist)
         next()
     } catch (error) {
         res.status(400).json({

@@ -24,8 +24,8 @@ const userModel = new Schema({
     },
     role: {
         type: String,
-        enum: ["Customer", "Admin"],
-        defult : "Customer"
+        enum: ["user", "Admin"],
+        default : "user",
     },
     otp : {
         type : Number,

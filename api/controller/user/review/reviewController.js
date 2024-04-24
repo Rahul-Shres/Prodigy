@@ -52,50 +52,39 @@ exports.getMyReviews = async(req,res)=>{
     }
 }
 
-// exports.getProductReview = async(req,res)=>{
-//     const productId = req.params.id;
-//     if(!productId){
-//         return res.status(400).json({
-//             message : "Please provide productId"
-//         })
-//     }
-//     const productExist = await Product.findById(productId)
-//     if(!productExist){
-//         return res.status(404).json({
-//             message : "Product with that id doesn't exist"
-//         })
-//     }
-//     const reviews = await reviewSchema.find({productId}).populate("userId").populate("productId")
-//     res.status(200).json({
-//         message : "review fetched successfully",
-//         data : reviews
 
-//     })
-// }
 
 exports.deleteReview = async(req,res)=>{
-    const reviewId = req.params.id;
+    const reviewId   = req.params.id 
+    // check if that user created this review 
+    
     const userId = req.user.id 
+    console.log("reviewId", reviewId)
+    console.log("userId", userId)
     if(!reviewId){
         res.status(400).json({
-            message : "Please provide reviewId"
+            message : "Please provide reviewId "
         })
-
-        const ownerIdOfReview = review.userId 
-        if(ownerIdOfReview !== userId){
-            return res.status(400).json({
-                message : "You don't have permission to delete this review"
-            })
-
-
     }
+    const review = await Review.findById(reviewId)
+    console.log(review)
+    const ownerIdOfReview = review.userId 
+    console.log(ownerIdOfReview, "ownerIdOfReview")
+    if(ownerIdOfReview.toString() !== userId){
+        return res.status(400).json({
+            message : "You don't have permission to delete this review"
+        })
+    } 
+
+ 
     await Review.findByIdAndDelete(reviewId)
     res.status(200).json({
         message : "Review delete successfully"
     })
-}
 
 }
+
+
 
 // exports.addProductReview = async(req,res) =>{
 //     const productId = req.params.id
