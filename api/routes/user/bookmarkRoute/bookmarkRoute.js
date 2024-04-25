@@ -8,6 +8,6 @@ const router = require("express").Router();
 
 
 router.route("/").get(isAuthenticated, catchAsync(getMyBookmarks))
-router.route("/:productId").post(isAuthenticated, catchAsync(addToBookmark)).delete(catchAsync(deleteProductFromBookmark))
+router.route("/:productId").post(isAuthenticated, catchAsync(addToBookmark)).delete(isAuthenticated,catchAsync(deleteProductFromBookmark))
 
 module.exports = router
